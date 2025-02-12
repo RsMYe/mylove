@@ -1,10 +1,10 @@
-<!-- gift.html -->
+<!-- Gift Page (gift.html) -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gift Hunt</title>
+    <title>Your Gift</title>
     <style>
         body {
             text-align: center;
@@ -12,34 +12,31 @@
             font-family: Arial, sans-serif;
             color: white;
         }
-        h1 {
-            color: yellow;
-        }
-        .hidden {
-            display: none;
+        .hidden-button {
+            position: absolute;
+            top: 80%;
+            left: 10%;
+            opacity: 0;
+            width: 50px;
+            height: 50px;
+            background-color: transparent;
         }
     </style>
-    <script>
-        function showPasswordInput() {
-            document.getElementById('password-container').classList.remove('hidden');
-        }
-        function checkPassword() {
-            let password = document.getElementById('password').value;
-            if (password === "ILOVEMYBF") {
-                alert("HIII");
-            } else {
-                alert("Wrong password, try again!");
-            }
-        }
-    </script>
 </head>
 <body>
     <h1>Look for your gift 🎁</h1>
-    <button class="button" onclick="showPasswordInput()">Enter Gift Password</button>
-    <div id="password-container" class="hidden">
-        <h2>Enter the Gift Password:</h2>
-        <input type="text" id="password" placeholder="Enter password">
-        <button class="button" onclick="checkPassword()">Submit</button>
-    </div>
+    <button class="hidden-button" onclick="askPassword()"></button>
+    
+    <script>
+        function askPassword() {
+            let password = prompt("Enter the gift password:");
+            if (password === "love2024") {
+                alert("Congratulations! You found your gift 🎁❤️");
+            } else {
+                alert("Wrong password! Keep looking.");
+            }
+        }
+    </script>
 </body>
 </html>
+
