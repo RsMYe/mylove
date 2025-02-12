@@ -1,16 +1,16 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Be My Valentine?</title>
+    <title>Valentine's Day Special</title>
     <style>
         body {
             text-align: center;
             background: linear-gradient(to right, pink, red);
             font-family: Arial, sans-serif;
             color: white;
+            overflow: hidden;
         }
         h1 {
             color: yellow;
@@ -35,6 +35,24 @@
             color: white;
             pointer-events: none;
         }
+        .balloon {
+            position: absolute;
+            width: 50px;
+            animation: float 6s infinite ease-in-out;
+        }
+        .cherry-blossom {
+            position: absolute;
+            width: 20px;
+            animation: fall 5s infinite linear;
+        }
+        @keyframes float {
+            0% { transform: translateY(100vh); }
+            100% { transform: translateY(-10vh); }
+        }
+        @keyframes fall {
+            0% { transform: translateY(-10vh) rotate(0deg); }
+            100% { transform: translateY(100vh) rotate(360deg); }
+        }
     </style>
 </head>
 <body>
@@ -43,5 +61,26 @@
         <button class="button yes-button" onclick="window.location.href='love.html'">Yes</button>
         <button class="button no-button">No</button>
     </div>
+    
+    <script>
+        function createFloatingElements() {
+            for (let i = 0; i < 10; i++) {
+                let balloon = document.createElement('img');
+                balloon.src = 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Balloon_red.svg/512px-Balloon_red.svg.png';
+                balloon.className = 'balloon';
+                balloon.style.left = Math.random() * window.innerWidth + 'px';
+                balloon.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                document.body.appendChild(balloon);
+
+                let petal = document.createElement('img');
+                petal.src = 'https://upload.wikimedia.org/wikipedia/commons/6/6b/Cherry_blossom_flower.png';
+                petal.className = 'cherry-blossom';
+                petal.style.left = Math.random() * window.innerWidth + 'px';
+                petal.style.animationDuration = (Math.random() * 5 + 3) + 's';
+                document.body.appendChild(petal);
+            }
+        }
+        createFloatingElements();
+    </script>
 </body>
 </html>
