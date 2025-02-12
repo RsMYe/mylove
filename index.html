@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Valentine's Day Special</title>
+    <title>Be My Valentine?</title>
     <style>
         body {
             text-align: center;
@@ -11,12 +11,14 @@
             font-family: Arial, sans-serif;
             color: white;
             overflow: hidden;
+            position: relative;
         }
         h1 {
             color: yellow;
         }
         .container {
             margin-top: 50px;
+            position: relative;
         }
         .button {
             padding: 15px 30px;
@@ -24,34 +26,30 @@
             border: none;
             border-radius: 10px;
             cursor: pointer;
+            position: absolute;
             transition: 0.3s;
         }
         .yes-button {
             background-color: gold;
             color: red;
+            left: 45%;
+            top: 50%;
         }
         .no-button {
             background-color: grey;
             color: white;
+            left: 55%;
+            top: 50%;
             pointer-events: none;
         }
-        .balloon {
+        .balloon, .rose, .cherry-blossom {
             position: absolute;
             width: 50px;
             animation: float 6s infinite ease-in-out;
         }
-        .cherry-blossom {
-            position: absolute;
-            width: 20px;
-            animation: fall 5s infinite linear;
-        }
         @keyframes float {
             0% { transform: translateY(100vh); }
             100% { transform: translateY(-10vh); }
-        }
-        @keyframes fall {
-            0% { transform: translateY(-10vh) rotate(0deg); }
-            100% { transform: translateY(100vh) rotate(360deg); }
         }
     </style>
 </head>
@@ -59,28 +57,43 @@
     <h1>Will You Be My Valentine? 💛</h1>
     <div class="container">
         <button class="button yes-button" onclick="window.location.href='love.html'">Yes</button>
-        <button class="button no-button">No</button>
+        <button class="button no-button" id="noButton">No</button>
     </div>
     
     <script>
         function createFloatingElements() {
             for (let i = 0; i < 10; i++) {
                 let balloon = document.createElement('img');
-                balloon.src = 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Balloon_red.svg/512px-Balloon_red.svg.png';
+                balloon.src = 'https://upload.wikimedia.org/wikipedia/commons/5/59/Balloon_red.svg';
                 balloon.className = 'balloon';
                 balloon.style.left = Math.random() * window.innerWidth + 'px';
-                balloon.style.animationDuration = (Math.random() * 3 + 3) + 's';
                 document.body.appendChild(balloon);
-
-                let petal = document.createElement('img');
-                petal.src = 'https://upload.wikimedia.org/wikipedia/commons/6/6b/Cherry_blossom_flower.png';
-                petal.className = 'cherry-blossom';
-                petal.style.left = Math.random() * window.innerWidth + 'px';
-                petal.style.animationDuration = (Math.random() * 5 + 3) + 's';
-                document.body.appendChild(petal);
+            }
+            for (let i = 0; i < 5; i++) {
+                let rose = document.createElement('img');
+                rose.src = 'https://upload.wikimedia.org/wikipedia/commons/3/3b/Rose.png';
+                rose.className = 'rose';
+                rose.style.left = Math.random() * window.innerWidth + 'px';
+                document.body.appendChild(rose);
             }
         }
         createFloatingElements();
+
+        const noButton = document.getElementById("noButton");
+        document.addEventListener("mousemove", function(event) {
+            let rect = noButton.getBoundingClientRect();
+            let distance = Math.sqrt(
+                Math.pow(event.clientX - (rect.left + rect.width / 2), 2) +
+                Math.pow(event.clientY - (rect.top + rect.height / 2), 2)
+            );
+            if (distance < 100) {
+                let newX = Math.random() * (window.innerWidth - rect.width);
+                let newY = Math.random() * (window.innerHeight - rect.height);
+                noButton.style.left = newX + "px";
+                noButton.style.top = newY + "px";
+            }
+        });
     </script>
 </body>
 </html>
+
